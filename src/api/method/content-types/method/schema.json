@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "methods",
+  "info": {
+    "singularName": "method",
+    "pluralName": "methods",
+    "displayName": "method"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}
