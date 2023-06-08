@@ -21,13 +21,13 @@ module.exports = [
             "'self'",
             "data:",
             "blob:",
-            `${env("DO_SPACE_BUCKET")}.${env("DO_SPACE_ENDPOINT")}`,
+            "*.digitaloceanspaces.com",
           ],
           "media-src": [
             "'self'",
             "data:",
             "blob:",
-            `${env("DO_SPACE_BUCKET")}.${env("DO_SPACE_ENDPOINT")}`,
+            "*.digitaloceanspaces.com",
           ],
           upgradeInsecureRequests: null,
 
