@@ -36,10 +36,11 @@
       "type": "boolean",
       "default": false
     },
-    "location": {
+    "locations": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::location.location"
+      "relation": "oneToMany",
+      "target": "api::location.location",
+      "mappedBy": "video"
     },
     "method": {
       "type": "relation",
