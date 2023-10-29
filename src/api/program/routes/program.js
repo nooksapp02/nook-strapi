@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * plan router
+ * program router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::plan.plan');
+module.exports = createCoreRouter('api::program.program');
