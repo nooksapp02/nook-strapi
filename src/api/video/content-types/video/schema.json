@@ -8,49 +8,25 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
+    "preview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.media"
     },
-    "link": {
-      "type": "string"
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.media",
+      "required": true
     },
-    "tumbnail": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "descripcion": {
-      "type": "text"
-    },
-    "active": {
-      "type": "boolean",
-      "default": false
-    },
-    "locations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::location.location",
-      "mappedBy": "video"
-    },
-    "method": {
+    "product": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::method.method"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
+      "target": "api::product.product"
     }
   }
 }

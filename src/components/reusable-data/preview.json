@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_reusable_data_previews",
+  "info": {
+    "displayName": "review",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ranting": {
+      "type": "decimal",
+      "max": 5
+    },
+    "comment": {
+      "type": "component",
+      "repeatable": true,
+      "component": "reusable-data.comment"
+    }
+  }
+}

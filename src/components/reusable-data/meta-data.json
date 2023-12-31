@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_reusable_data_meta_data",
+  "info": {
+    "displayName": "tag",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string"
+    }
+  }
+}

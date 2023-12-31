@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_reusable_data_comments",
+  "info": {
+    "displayName": "comment"
+  },
+  "options": {},
+  "attributes": {
+    "profileUser": {
+      "type": "integer"
+    },
+    "nick": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 255,
+      "required": true
+    },
+    "profileImage": {
+      "type": "string"
+    }
+  }
+}

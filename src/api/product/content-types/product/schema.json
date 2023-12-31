@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "onlyList": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "tumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "filterTag": {
+      "type": "component",
+      "repeatable": true,
+      "component": "reusable-data.meta-data"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "amount": {
+      "displayName": "Amount",
+      "type": "component",
+      "repeatable": false,
+      "component": "reusable-data.amount"
+    },
+    "visibility": {
+      "type": "enumeration",
+      "enum": [
+        "AUTHENTICATED",
+        "SUSCRIBED"
+      ],
+      "default": "AUTH",
+      "required": true
+    },
+    "profiles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::profile.profile"
+    }
+  }
+}
