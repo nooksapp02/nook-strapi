@@ -32,6 +32,14 @@ module.exports = {
         },
         {
             method: 'POST',
+            path: '/profile/update/customForm',
+            handler: 'profile.updateCustomForm',
+            config: {
+                middlewares: ['api::profile.update-custom-form-req', 'api::profile.is-owner'],
+            }
+        },
+        {
+            method: 'POST',
             path: '/profile/update/personal-data',
             handler: 'profile.updatePersonalData',
             config: {

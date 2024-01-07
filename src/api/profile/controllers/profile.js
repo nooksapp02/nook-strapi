@@ -40,10 +40,11 @@ module.exports = createCoreController('api::profile.profile',
 
         async updateObjectives(ctx) {
             const { profileId, flow, objectives } = ctx.request.body;
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow(flow);
 
             await strapi.entityService.update('api::profile.profile', profileId, {
                 data: {
-                    appflow: flow,
+                    appflow,
                     objectives
                 },
             });
@@ -54,10 +55,11 @@ module.exports = createCoreController('api::profile.profile',
 
         async updateTrainingTypes(ctx) {
             const { profileId, flow, training_types } = ctx.request.body;
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow(flow);
 
             await strapi.entityService.update('api::profile.profile', profileId, {
                 data: {
-                    appflow: flow,
+                    appflow,
                     training_types
                 },
             });
@@ -68,11 +70,27 @@ module.exports = createCoreController('api::profile.profile',
 
         async updateFrecuencyDay(ctx) {
             const { profileId, flow, frecuency_day } = ctx.request.body;
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow(flow);
 
             await strapi.entityService.update('api::profile.profile', profileId, {
                 data: {
-                    appflow: flow,
+                    appflow,
                     frecuency_day
+                },
+            });
+
+            ctx.send({ ok: true });
+        },
+
+        async updateCustomForm(ctx) {
+            const { profileId, flow, customForm } = ctx.request.body;
+
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow(flow);
+
+            await strapi.entityService.update('api::profile.profile', profileId, {
+                data: {
+                    appflow,
+                    customForm
                 },
             });
 
@@ -84,6 +102,8 @@ module.exports = createCoreController('api::profile.profile',
             const data = { name, lastname, weight, height, age };
             const profileApi = 'api::profile.profile';
             const personalDataApi = 'api::personal-data.personal-data';
+
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow(flow);
 
             const getPersonalData = await strapi.entityService.findOne(profileApi, profileId, { populate: 'personal_data' });
             let personalDataId;
@@ -98,7 +118,7 @@ module.exports = createCoreController('api::profile.profile',
 
             await strapi.entityService.update(profileApi, profileId, {
                 data: {
-                    appflow: flow,
+                    appflow,
                     personal_data: personalDataId
                 },
             });
