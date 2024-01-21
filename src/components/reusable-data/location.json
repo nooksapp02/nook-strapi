@@ -1,15 +1,21 @@
 {
   "collectionName": "components_reusable_data_locations",
   "info": {
-    "displayName": "location"
+    "displayName": "location",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "coordinates": {
-      "type": "string"
-    },
     "label": {
       "type": "string"
+    },
+    "latitude": {
+      "type": "decimal",
+      "required": true
+    },
+    "longitude": {
+      "required": true,
+      "type": "decimal"
     }
   }
 }
