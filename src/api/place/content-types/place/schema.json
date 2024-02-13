@@ -32,11 +32,16 @@
       "required": true
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "creatorProfile": {
+      "type": "integer",
+      "required": true
     }
   }
 }

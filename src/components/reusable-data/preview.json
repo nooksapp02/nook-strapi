@@ -12,7 +12,7 @@
     },
     "comment": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "reusable-data.comment"
     }
   }
