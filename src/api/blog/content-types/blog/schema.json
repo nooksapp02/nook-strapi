@@ -14,9 +14,10 @@
   "attributes": {
     "product": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::product.product",
-      "private": true
+      "private": true,
+      "inversedBy": "blogs"
     },
     "preview": {
       "displayName": "Blog",
