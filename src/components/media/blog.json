@@ -20,6 +20,13 @@
         "videos",
         "audios"
       ]
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "duration": {
+      "type": "float"
     }
   }
 }

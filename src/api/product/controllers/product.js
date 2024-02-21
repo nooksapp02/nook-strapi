@@ -31,7 +31,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             },
         } : {};
 
-        const filterByCategory = category === '*'  ? {} : {
+        const filterByCategory = category === '*' ? {} : {
             categories: {
                 name: {
                     $contains: category.toLocaleLowerCase(),
@@ -57,6 +57,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         ctx.send(sanitizedResults);
     },
     async findOne(ctx) {
+        const profileId = ctx.request.query.profileId;
         const productId = ctx.params.id;
         const result = await strapi.entityService.findOne('api::product.product', productId, {
             fields: ['id', 'createdAt', 'publishedAt', 'title', 'description', 'visibility', 'onlyList', 'metadata'],
@@ -64,9 +65,18 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 tumbnail: true,
                 metadata: true,
                 amount: true,
+                categories: {
+                    fields: ['name']
+                },
+                profiles: {
+                    fields: ['id']
+                },
+                filterTag: {
+                    fields: ['tag']
+                },
                 videos: {
                     fields: ['*'],
-                    populate: ['*']
+                    populate: ['preview', 'content']
                 },
                 blogs: {
                     fields: ['*'],
@@ -79,8 +89,9 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
 
         const isVisible = strapi.service('api::product.visibility').canView(ctx, result);
 
-        const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt } = result;
+        const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt, categories, profiles } = result;
 
+        console.log(videos);
         let response = {
             id: result.id,
             type: 'PREVIEW',
@@ -88,7 +99,10 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 blogs: setContent(blogs, isVisible),
                 videos: setContent(videos, isVisible),
             },
-            title, description, metadata, tumbnail, filterTag, createdAt
+            category: categories[0].name,
+            filterTag: filterTag[0].tag,
+            suscribed: profiles.some(profile => profile.id === parseInt(profileId)),
+            title, description, metadata, tumbnail, createdAt
         };
 
         if (isVisible) {
@@ -117,11 +131,14 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             }
         });
 
-        const sanitizedResults = await this.sanitizeOutput({status: 'ok'}, ctx);
+        const sanitizedResults = await this.sanitizeOutput({ status: 'ok' }, ctx);
         ctx.send(sanitizedResults);
     }
 }));
 
 function setContent(mediaArray, isVisible) {
-    return mediaArray.map(media => ({ id: media.id, content: isVisible ? media?.content?.content : media?.preview?.content }));
+    return mediaArray.map(media => {
+        const content = isVisible ? media.content : media.preview;
+        return { id: media.id, ...content}
+    });
 }
