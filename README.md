@@ -55,3 +55,7 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 ---
 
 <sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+
+to restore backup data 22-02-24
+$ npm run restore
+> encrypt: d+DfgwpYWKmW/Cu20VsM3Q==,PiJcrQyEAAHPYZJty4obPQ==,cOdFfGrhNVvafXjl5drZLw==,a+ey6il+6k/oAwmGPdBb0g==
