@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "maps",
+  "info": {
+    "singularName": "map",
+    "pluralName": "maps",
+    "displayName": "map"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "default": {
+      "type": "string"
+    }
+  }
+}

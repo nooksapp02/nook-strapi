@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "appflows",
+  "info": {
+    "singularName": "appflow",
+    "pluralName": "appflows",
+    "displayName": "appflow"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "page": {
+      "type": "string"
+    }
+  }
+}

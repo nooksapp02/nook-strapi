@@ -8,42 +8,37 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "description": {
-      "type": "text"
-    },
-    "workouts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::video.video"
-    },
-    "title": {
-      "type": "string"
-    },
-    "points": {
-      "type": "integer"
-    },
-    "mainImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "payment_method": {
+    "product": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::payment-method.payment-method"
+      "target": "api::product.product"
     },
-    "price": {
-      "type": "decimal"
+    "workouts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media.media"
+    },
+    "recipes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media.blog"
+    },
+    "contentProgram": {
+      "type": "json"
+    },
+    "previewWorkouts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media.media"
+    },
+    "previewRecipes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media.blog"
     }
   }
 }

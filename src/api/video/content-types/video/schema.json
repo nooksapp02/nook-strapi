@@ -12,45 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
+    "preview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.media"
     },
-    "link": {
-      "type": "string"
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.media",
+      "required": true
     },
-    "tumbnail": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "descripcion": {
-      "type": "text"
-    },
-    "active": {
-      "type": "boolean",
-      "default": false
-    },
-    "locations": {
+    "product": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::location.location",
-      "mappedBy": "video"
-    },
-    "method": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::method.method"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "videos"
     }
   }
 }

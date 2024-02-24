@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_reusable_data_amounts",
+  "info": {
+    "displayName": "Amount",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "total": {
+      "type": "float",
+      "required": true
+    },
+    "taxes": {
+      "type": "float"
+    },
+    "discount": {
+      "type": "float"
+    }
+  }
+}

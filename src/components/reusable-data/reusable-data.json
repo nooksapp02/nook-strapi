@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_reusable_data_reusable_data",
+  "info": {
+    "displayName": "ValueAndtype",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}

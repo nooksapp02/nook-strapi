@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "objectives",
+  "info": {
+    "singularName": "objective",
+    "pluralName": "objectives",
+    "displayName": "Objective",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::profile.profile",
+      "inversedBy": "objectives"
+    }
+  }
+}

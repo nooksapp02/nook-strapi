@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "training_types",
+  "info": {
+    "singularName": "training-type",
+    "pluralName": "training-types",
+    "displayName": "trainingType"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::profile.profile",
+      "inversedBy": "training_types"
+    }
+  }
+}

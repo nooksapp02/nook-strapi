@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_reusable_data_options",
+  "info": {
+    "displayName": "Option",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

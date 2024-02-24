@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "personal_datas",
+  "info": {
+    "singularName": "personal-data",
+    "pluralName": "personal-datas",
+    "displayName": "Personal Data",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "age": {
+      "type": "integer",
+      "min": 6,
+      "max": 150,
+      "default": 1,
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "lastname": {
+      "type": "string",
+      "required": true
+    },
+    "height": {
+      "type": "component",
+      "repeatable": false,
+      "component": "reusable-data.reusable-data"
+    },
+    "weight": {
+      "type": "component",
+      "repeatable": false,
+      "component": "reusable-data.reusable-data"
+    }
+  }
+}

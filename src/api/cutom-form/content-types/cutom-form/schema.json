@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cutom_forms",
+  "info": {
+    "singularName": "cutom-form",
+    "pluralName": "cutom-forms",
+    "displayName": "Custom Form",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "MULTIPLE"
+      ],
+      "required": true,
+      "default": "MULTIPLE"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "options": {
+      "displayName": "Option",
+      "type": "component",
+      "repeatable": true,
+      "component": "reusable-data.option"
+    },
+    "maxSelection": {
+      "type": "integer",
+      "min": 1,
+      "default": 1,
+      "required": true
+    }
+  }
+}

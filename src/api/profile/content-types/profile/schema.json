@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": {
+    "singularName": "profile",
+    "pluralName": "profiles",
+    "displayName": "profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "profiles"
+    },
+    "objectives": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::objective.objective",
+      "mappedBy": "profile"
+    },
+    "appflow": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::appflow.appflow"
+    },
+    "training_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::training-type.training-type",
+      "mappedBy": "profile"
+    },
+    "frecuency_day": {
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "max": 7
+    },
+    "personal_data": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::personal-data.personal-data"
+    },
+    "profileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "customForm": {
+      "type": "json"
+    }
+  }
+}
