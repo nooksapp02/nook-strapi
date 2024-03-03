@@ -4,7 +4,6 @@ const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
   async callback(ctx) {
-    console.log('hola desde ctx user !!!!!!!!', ctx);
     // Obtén los datos del usuario desde el proveedor OAuth
     const userData = await strapi.plugins['users-permissions'].services.providers.callback(ctx);
 

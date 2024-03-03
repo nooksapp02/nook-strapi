@@ -80,7 +80,7 @@ module.exports = createCoreController('api::place.place',
         },
         async addPlace(ctx) {
             try {
-                const { name, longitude, latitude } = ctx.request.body;
+                const { name, description, longitude, latitude } = ctx.request.body;
                 const creatorProfile = ctx.state.user.id;
                 const url = `${process.env.API_MAP_DOMAIN}/v5/mapbox.places/${longitude},${latitude}.json?limit=1&types=address&access_token=${process.env.API_MAP_tOKEN}`;
 
@@ -96,6 +96,7 @@ module.exports = createCoreController('api::place.place',
                 const create = await strapi.entityService.create('api::place.place', {
                     data: {
                         name,
+                        description,
                         location: newLocation,
                         creatorProfile,
                         publishedAt: new Date()
