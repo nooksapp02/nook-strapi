@@ -26,7 +26,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         const filterByProfile = profileId ? {
             profiles: {
                 id: {
-                    $contains: profileId,
+                    $contains: parseInt(profileId),
                 },
             },
         } : {};
@@ -49,6 +49,8 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 ...filterByCategory
             }
         });
+
+        console.log('result find:', result);
 
         result.map(product => { 
             product.tumbnail = product?.tumbnail.formats.small.url,
@@ -102,6 +104,8 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         if (!result?.publishedAt) throw new NotFoundError('No data');
 
         const isVisible = strapi.service('api::product.visibility').canView(ctx, result);
+
+        console.log('result find one:', result);
 
         const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt, categories, profiles } = result;
 
