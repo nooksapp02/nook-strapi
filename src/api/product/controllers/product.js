@@ -26,7 +26,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         const filterByProfile = profileId ? {
             profiles: {
                 id: {
-                    $contains: profileId,
+                    $contains: parseInt(profileId),
                 },
             },
         } : {};
@@ -40,7 +40,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         };
 
         const result = await strapi.entityService.findMany('api::product.product', {
-            start, limit, fields: ['id', 'createdAt', 'publishedAt', 'title', 'description', 'visibility', 'onlyList'], filters: {
+            start, limit, fields: ['id', 'createdAt', 'publishedAt', 'title', 'description', 'visibility', 'onlyList'], populate: ['tumbnail'], filters: {
                 publishedAt: {
                     $notNull: true,
                 },
@@ -48,10 +48,13 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 ...filterByProfile,
                 ...filterByCategory
             }
-
         });
 
-        result.map(product => product.canView = strapi.service('api::product.visibility').canView(ctx, product) ? true : false)
+        result.map(product => { 
+            product.tumbnail = product?.tumbnail.formats.small.url,
+            product.canView = strapi.service('api::product.visibility').canView(ctx, product) ? true : false;
+        }
+        )
 
         const sanitizedResults = await this.sanitizeOutput(result, ctx);
         ctx.send(sanitizedResults);
@@ -59,6 +62,11 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
     async findOne(ctx) {
         const profileId = ctx.request.query.profileId;
         const productId = ctx.params.id;
+        const mediaPopulate = {
+            fields: ['*'],
+            populate: ['tumbnail'],
+        }
+
         const result = await strapi.entityService.findOne('api::product.product', productId, {
             fields: ['id', 'createdAt', 'publishedAt', 'title', 'description', 'visibility', 'onlyList', 'metadata'],
             populate: {
@@ -76,11 +84,17 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 },
                 videos: {
                     fields: ['*'],
-                    populate: ['preview', 'content']
+                    populate: {
+                        preview: mediaPopulate,
+                        content: mediaPopulate,
+                    }
                 },
                 blogs: {
                     fields: ['*'],
-                    populate: ['preview', 'content']
+                    populate: {
+                        preview: mediaPopulate,
+                        content: mediaPopulate,
+                    }
                 },
             }
         });
@@ -91,7 +105,6 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
 
         const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt, categories, profiles } = result;
 
-        console.log(videos);
         let response = {
             id: result.id,
             type: 'PREVIEW',
@@ -99,10 +112,11 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 blogs: setContent(blogs, isVisible),
                 videos: setContent(videos, isVisible),
             },
-            category: categories[0].name,
-            filterTag: filterTag[0].tag,
+            category: categories[0]?.name,
+            filterTag: filterTag[0]?.tag,
             suscribed: profiles.some(profile => profile.id === parseInt(profileId)),
-            title, description, metadata, tumbnail, createdAt
+            tumbnail: tumbnail?.url,
+            title, description, metadata, createdAt
         };
 
         if (isVisible) {
@@ -139,6 +153,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
 function setContent(mediaArray, isVisible) {
     return mediaArray.map(media => {
         const content = isVisible ? media.content : media.preview;
+        content.tumbnail = content?.tumbnail.formats.thumbnail.url;
         return { id: media.id, ...content}
     });
 }

@@ -16,7 +16,6 @@ module.exports = createCoreController('api::map.map',
                 const response = await fetch(url, { method: 'GET' });
                 const result = await response.json();
                 if (response?.status !== 200) {
-                    console.log(result);
                     throw new NotFoundError(`MAP API ERROR`);
                 }
 

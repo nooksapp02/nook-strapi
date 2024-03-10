@@ -29,7 +29,7 @@ module.exports = createCoreController('api::profile.profile',
 
         async create(ctx) {
             const userId = ctx.state.user.id;
-            const appflow = await strapi.entityService.findOne('api::appflow.appflow', 1, { fields: ['id'] });
+            const appflow = await strapi.service('api::profile.validate-appflow').validateAppflow('ONB_QUESTION_1');
             if (!appflow) {
                 throw new ValidationError('not found profile data');
             }

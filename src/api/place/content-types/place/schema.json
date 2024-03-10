@@ -42,6 +42,10 @@
     "creatorProfile": {
       "type": "integer",
       "required": true
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 255
     }
   }
 }
