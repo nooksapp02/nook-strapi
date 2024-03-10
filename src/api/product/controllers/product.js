@@ -50,8 +50,6 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             }
         });
 
-        console.log('result find:', result);
-
         result.map(product => { 
             product.tumbnail = product?.tumbnail.formats.small.url,
             product.canView = strapi.service('api::product.visibility').canView(ctx, product) ? true : false;
@@ -104,8 +102,6 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         if (!result?.publishedAt) throw new NotFoundError('No data');
 
         const isVisible = strapi.service('api::product.visibility').canView(ctx, result);
-
-        console.log('result find one:', result);
 
         const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt, categories, profiles } = result;
 
