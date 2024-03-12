@@ -26,7 +26,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         const filterByProfile = profileId ? {
             profiles: {
                 id: {
-                    $contains: 2,
+                    $contains: "2",
                 },
             },
         } : {};
