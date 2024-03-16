@@ -25,8 +25,8 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
 
         const filterByProfile = profileId ? {
             profiles: {
-                id: {
-                    $contains: "2",
+                frecuency_day: {
+                    $contains: profileId,
                 },
             },
         } : {};
@@ -38,8 +38,6 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
                 },
             },
         };
-
-        console.log('debug', filterByProfile);
 
         const result = await strapi.entityService.findMany('api::product.product', {
             start, limit, fields: ['id', 'createdAt', 'publishedAt', 'title', 'description', 'visibility', 'onlyList'], populate: ['tumbnail'], filters: {
