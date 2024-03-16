@@ -23,13 +23,13 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             },
         };
 
-        const filterByProfile = profileId ? {
+        const filterByProfile = profileId === '*' ? {} : {
             profiles: {
                 frecuency_day: {
                     $contains: profileId,
                 },
             },
-        } : {};
+        };
 
         const filterByCategory = category === '*' ? {} : {
             categories: {
