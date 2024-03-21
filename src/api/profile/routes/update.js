@@ -46,5 +46,13 @@ module.exports = {
                 middlewares: ['api::profile.update-personal-data-req', 'api::profile.is-owner'],
             }
         },
+        {
+            method: 'POST',
+            path: '/profile/update/image',
+            handler: 'profile.updateProfileImage',
+            config: {
+                middlewares: ['api::profile.update-image-req', 'api::profile.is-owner'],
+            }
+        },
     ],
 };
