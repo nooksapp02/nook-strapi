@@ -4,7 +4,7 @@ const { ValidationError } = require('@strapi/utils').errors;
 module.exports = (config, { strapi }) => {
 
   return async (ctx, next) => {
-    const requiredFields = ['longitude', 'latitude', 'name', 'description', 'imagesIds'];
+    const requiredFields = ['imageId'];
     const missingFields = requiredFields.filter(field => !ctx.request.body.hasOwnProperty(field));
 
     if (missingFields.length > 0) {

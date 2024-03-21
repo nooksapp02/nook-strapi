@@ -82,6 +82,20 @@ module.exports = createCoreController('api::profile.profile',
             ctx.send({ ok: true });
         },
 
+        async updateProfileImage(ctx) {
+            const { profileId} = ctx.request.body;
+
+            await strapi.entityService.update('api::profile.profile', profileId, {
+                data: {
+                    profileImage: {
+                        connect: [imageId]
+                    }
+                },
+            });
+
+            ctx.send({ ok: true });
+        },
+
         async updateCustomForm(ctx) {
             const { profileId, flow, customForm } = ctx.request.body;
 

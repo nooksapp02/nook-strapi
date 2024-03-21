@@ -13,7 +13,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
         const limit = ctx.request.query?.limit || 10;
         const type = ctx.request.query?.type || '*';
         const category = ctx.request.query?.category || '*';
-        const profileId = ctx.request.query?.profileId || null;
+        const profileId = ctx.request.query?.profileId || '*';
 
         const filterByTag = type === '*' ? {} : {
             filterTag: {
@@ -50,9 +50,9 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             }
         });
 
-        result.map(product => { 
+        result.map(product => {
             product.tumbnail = product?.tumbnail.formats.small.url,
-            product.canView = strapi.service('api::product.visibility').canView(ctx, product) ? true : false;
+                product.canView = strapi.service('api::product.visibility').canView(ctx, product) ? true : false;
         }
         )
 
@@ -105,6 +105,18 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
 
         const { title, description, metadata, filterTag, tumbnail, amount, blogs, videos, createdAt, categories, profiles } = result;
 
+        let initialValue = 0;
+        const videosDuration = videos.reduce(
+            (accumulator, video) => video.content?.duration + accumulator,
+            initialValue,
+        );
+
+        initialValue = 0;
+        const blogsDuration = blogs.reduce(
+            (accumulator, blog) => blog.content?.duration + accumulator,
+            initialValue,
+        );
+
         let response = {
             id: result.id,
             type: 'PREVIEW',
@@ -116,6 +128,7 @@ module.exports = createCoreController('api::product.product', ({ strapi }) => ({
             filterTag: filterTag[0]?.tag,
             suscribed: profiles.some(profile => profile.id === parseInt(profileId)),
             tumbnail: tumbnail?.url,
+            duration: videosDuration + blogsDuration,
             title, description, metadata, createdAt
         };
 
@@ -154,6 +167,6 @@ function setContent(mediaArray, isVisible) {
     return mediaArray.map(media => {
         const content = isVisible ? media.content : media.preview;
         content.tumbnail = content?.tumbnail.formats.thumbnail.url;
-        return { id: media.id, ...content}
+        return { id: media.id, ...content }
     });
 }
