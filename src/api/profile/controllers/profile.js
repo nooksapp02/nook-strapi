@@ -87,9 +87,7 @@ module.exports = createCoreController('api::profile.profile',
 
             await strapi.entityService.update('api::profile.profile', profileId, {
                 data: {
-                    profileImage: {
-                        connect: [imageId]
-                    }
+                    profileImage: imageId
                 },
             });
 
