@@ -83,7 +83,7 @@ module.exports = createCoreController('api::profile.profile',
         },
 
         async updateProfileImage(ctx) {
-            const { profileId} = ctx.request.body;
+            const { profileId, imageId} = ctx.request.body;
 
             await strapi.entityService.update('api::profile.profile', profileId, {
                 data: {

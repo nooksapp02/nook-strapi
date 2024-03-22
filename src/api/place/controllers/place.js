@@ -101,7 +101,7 @@ module.exports = createCoreController('api::place.place',
                         creatorProfile,
                         publishedAt: new Date(),
                         images: {
-                            connect: [imagesIds]
+                            connect: imagesIds
                         }
                     }
                 });
