@@ -100,9 +100,7 @@ module.exports = createCoreController('api::place.place',
                         location: newLocation,
                         creatorProfile,
                         publishedAt: new Date(),
-                        images: {
-                            connect: imagesIds
-                        }
+                        images: imagesIds
                     }
                 });
                 const sanitizedResults = await this.sanitizeOutput(create, ctx);
